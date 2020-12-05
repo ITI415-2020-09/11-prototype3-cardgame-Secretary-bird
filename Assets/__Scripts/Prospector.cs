@@ -120,42 +120,64 @@ public class Prospector : MonoBehaviour {
         }
 
         CardProspector cp;
-        // Follow the layout
-        foreach(SlotDef tSD in layout.slotDefs)
-        {
-            // ^ Iterate through all the SlotDefs in the layout.slotDefs as tSD
-            cp = Draw(); // Pull a card from the top (beginning) of the draw Pile
-            cp.faceUp = tSD.faceUp; // Set its faceUp to the value in SlotDef
-            cp.transform.parent = layoutAnchor; // Make its parent layoutAnchor
-            // This replaces the previous parent: deck.deckAnchor, which
-            // appears as _Deck in the Hierarchy when the scene is playing.
-            cp.transform.localPosition = new Vector3(layout.multiplier.x * tSD.x, layout.multiplier.y * tSD.y, -tSD.layerID);
-            // ^ Set the localPosition of the card based on slotDef
-            cp.layoutID = tSD.id;
-            cp.slotDef = tSD;
-            // CardProspectors in the tableau have the state CardState.tableau
-            cp.state = eCardState.tableau;
-            // CardProspectors in the tableau have the state CardSTate.tableau
-            cp.SetSortingLayerName(tSD.layerName); // Set the sorting layers
 
-            tableau.Add(cp); // Add this CardProspector to the List<> tableau
-        }
-
-        // Set which cards are hiding others
-        foreach (CardProspector tCP in tableau)
+        for (int i = 0; i < 4; i++)
         {
-            foreach(int hid in tCP.slotDef.hiddenBy)
+            for (int j =1; j<=13; j++)
             {
-                cp = FindCardByLayoutID(hid);
-                tCP.hiddenBy.Add(cp);
+                SlotDef tSD;
+                string tKui = "drawpile";
+                tSD = layout.sDict[tKui + j];
+                cp = Draw();
+                cp.faceUp = tSD.faceUp;
+                cp.transform.parent = layoutAnchor; 
+                cp.transform.localPosition = new Vector3(layout.multiplier.x * tSD.x, layout.multiplier.y * tSD.y, -tSD.layerID);
+                // ^ Set the localPosition of the card based on slotDef
+                cp.layoutID = tSD.id;
+                cp.slotDef = tSD;
+                // CardProspectors in the tableau have the state CardState.tableau
+                cp.state = (eCardState)j;
+                // CardProspectors in the tableau have the state CardSTate.tableau
+                cp.SetSortingLayerName(tSD.layerName); // Set the sorting layers
             }
         }
 
-        // Set up the initial target card
-        MoveToTarget(Draw());
+        // Follow the layout
+        //foreach(SlotDef tSD in layout.slotDefs)
+        //{
+        //    // ^ Iterate through all the SlotDefs in the layout.slotDefs as tSD
+        //    cp = Draw(); // Pull a card from the top (beginning) of the draw Pile
+        //    cp.faceUp = tSD.faceUp; // Set its faceUp to the value in SlotDef
+        //    cp.transform.parent = layoutAnchor; // Make its parent layoutAnchor
+        //    // This replaces the previous parent: deck.deckAnchor, which
+        //    // appears as _Deck in the Hierarchy when the scene is playing.
+        //    cp.transform.localPosition = new Vector3(layout.multiplier.x * tSD.x, layout.multiplier.y * tSD.y, -tSD.layerID);
+        //    // ^ Set the localPosition of the card based on slotDef
+        //    cp.layoutID = tSD.id;
+        //    cp.slotDef = tSD;
+        //    // CardProspectors in the tableau have the state CardState.tableau
+        //    cp.state = eCardState.tableau;
+        //    // CardProspectors in the tableau have the state CardSTate.tableau
+        //    cp.SetSortingLayerName(tSD.layerName); // Set the sorting layers
 
-        // Set up the Draw pile
-        UpdateDrawPile();
+        //    tableau.Add(cp); // Add this CardProspector to the List<> tableau
+        //}
+
+        //// Set which cards are hiding others
+        //foreach (CardProspector tCP in tableau)
+        //{
+        //    foreach(int hid in tCP.slotDef.hiddenBy)
+        //    {
+        //        cp = FindCardByLayoutID(hid);
+        //        tCP.hiddenBy.Add(cp);
+        //    }
+        //}
+
+        //// Set up the initial target card
+        //MoveToTarget(Draw());
+
+        //// Set up the Draw pile
+        //UpdateDrawPile();
     }
 
     // Convert from the layoutID int to the CardProspector with that ID

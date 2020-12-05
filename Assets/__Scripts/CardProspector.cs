@@ -5,10 +5,36 @@ using UnityEngine;
 //An enum defines a variable type with a few prenamed values
 public enum eCardState
 {
+    drawpile1=1,
+    drawpile2=2,
+    drawpile3=3,
+    drawpile4=4,
+    drawpile5=5,
+    drawpile6=6,
+    drawpile7=7,
+    drawpile8=8,
+    drawpile9=9,
+    drawpile10=10,
+    drawpile11=11,
+    drawpile12=12,
+    drawpile13=13,
+    discardpile1,
+    discardpile2,
+    discardpile3,
+    discardpile4,
+    discardpile5,
+    discardpile6,
+    discardpile7,
+    discardpile8,
+    discardpile9,
+    discardpile10,
+    discardpile11,
+    discardpile12,
+    discardpile13,
     drawpile,
     tableau,
-    target,
-    discard
+    discard,
+    target
 }
 
 public class CardProspector : Card {
