@@ -11,43 +11,43 @@
 	<!-- layer sets the depth layer so cards overlap properly -->
 	<!-- hiddenby is the ids of cards that keep a card face-down -->
 	
-	<slot type="drawpile1" x="3" y="5" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile1" x="3" y="5" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile1" x="3" y="5" faceup="0" layer="0"/>
 	
-	<slot type="drawpile2" x="6" y="3" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile2" x="6" y="3" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile2" x="6" y="3" faceup="0" layer="0"/>
 	
-	<slot type="drawpile3" x="7" y="0" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile3" x="7" y="0" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile3" x="7" y="0" faceup="0" layer="0"/>
 	
-	<slot type="drawpile4" x="6" y="-3" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile4" x="6" y="-3" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile4" x="6" y="-3" faceup="0" layer="0"/>
 	
-	<slot type="drawpile5" x="3" y="-5" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile5" x="3" y="-5" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile5" x="3" y="-5" faceup="0" layer="0"/>
 	
-	<slot type="drawpile6" x="0" y="-5.5" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile6" x="0" y="-5.5" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile6" x="0" y="-5.5" faceup="0" layer="0"/>
 	
-	<slot type="drawpile7" x="-3" y="-5" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile7" x="-3" y="-5" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile7" x="-3" y="-5" faceup="0" layer="0"/>
 	
-	<slot type="drawpile8" x="-6" y="-3" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile8" x="-6" y="-3" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile8" x="-6" y="-3" faceup="0" layer="0"/>
 	
-	<slot type="drawpile9" x="-7" y="0" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile9" x="-7" y="0" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile9" x="-7" y="0" faceup="0" layer="0"/>
 	
-	<slot type="drawpile10" x="-6" y="3" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile10" x="-6" y="3" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile10" x="-6" y="3" faceup="0" layer="0"/>
 	
-	<slot type="drawpile11" x="-3" y="5" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile11" x="-3" y="5" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile11" x="-3" y="5" faceup="0" layer="0"/>
 	
-	<slot type="drawpile12" x="0" y="5.5" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile12" x="0" y="5.5" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile12" x="0" y="5.5" faceup="0" layer="0"/>
 	
-	<slot type="drawpile13" x="0" y="0" faceup="1" xstagger="0.25" layer="1"/>
+	<slot type="drawpile13" x="0" y="0" faceup="1" xstagger="0.25" ystagger="0.2" layer="1"/>
 	<slot type="discardpile13" x="0" y="0" faceup="0" layer="0"/>
 </xml>
 	

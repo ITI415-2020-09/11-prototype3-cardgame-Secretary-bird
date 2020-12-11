@@ -28,7 +28,7 @@ public class Layout : MonoBehaviour {
     public SlotDef drawPile;
     public SlotDef discardPile;
     // This holds all of the possible names for the layers set by layerID
-    public string[] sortingLayerNames = new string[] { "Row0", "Row1", "Row2" };
+    public string[] sortingLayerNames = new string[] { "Discard", "Row0", "Row1", "Row2", "Row3"};
 
 	// This function is called to read in the LayoutXML.xml file
     public void ReadLayout(string xmlText)
@@ -65,7 +65,10 @@ public class Layout : MonoBehaviour {
             tSD.layerID = int.Parse(slotsX[i].att("layer"));
             //This converts the number of the layerID into a text layerName
             tSD.layerName = sortingLayerNames[tSD.layerID];
-
+            if (tSD.type.Contains("draw")){
+                tSD.stagger.x = float.Parse(slotsX[i].att("xstagger"));
+                tSD.stagger.y = float.Parse(slotsX[i].att("ystagger"));
+            }
             sDict.Add(tSD.type, tSD);
 
             //switch (tSD.type)
