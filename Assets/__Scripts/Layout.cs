@@ -24,10 +24,11 @@ public class Layout : MonoBehaviour {
     public Vector2 multiplier; // The offset of the tableau's center
     //SlotDef references
     public List<SlotDef> slotDefs; // All the SlotDefs for Row0-Row3
+    public Dictionary<string, SlotDef> sDict = new Dictionary<string, SlotDef>();
     public SlotDef drawPile;
     public SlotDef discardPile;
     // This holds all of the possible names for the layers set by layerID
-    public string[] sortingLayerNames = new string[] { "Row0", "Row1", "Row2", "Row3", "Discard", "Draw" };
+    public string[] sortingLayerNames = new string[] { "Discard", "Row0", "Row1", "Row2", "Row3"};
 
 	// This function is called to read in the LayoutXML.xml file
     public void ReadLayout(string xmlText)
@@ -64,32 +65,37 @@ public class Layout : MonoBehaviour {
             tSD.layerID = int.Parse(slotsX[i].att("layer"));
             //This converts the number of the layerID into a text layerName
             tSD.layerName = sortingLayerNames[tSD.layerID];
-
-            switch (tSD.type)
-            {
-                //pull additional attributes based on the type of this <slot>
-                case "slot":
-                    tSD.faceUp = (slotsX[i].att("faceup") == "1");
-                    tSD.id = int.Parse(slotsX[i].att("id"));
-                    if (slotsX[i].HasAtt("hiddenby"))
-                    {
-                        string[] hiding = slotsX[i].att("hiddenby").Split(',');
-                        foreach (string s in hiding)
-                        {
-                            tSD.hiddenBy.Add(int.Parse(s));
-                        }
-                    }
-                    slotDefs.Add(tSD);
-                    break;
-
-                case "drawpile":
-                    tSD.stagger.x = float.Parse(slotsX[i].att("xstagger"));
-                    drawPile = tSD;
-                    break;
-                case "discardpile":
-                    discardPile = tSD;
-                    break;
+            if (tSD.type.Contains("draw")){
+                tSD.stagger.x = float.Parse(slotsX[i].att("xstagger"));
+                tSD.stagger.y = float.Parse(slotsX[i].att("ystagger"));
             }
+            sDict.Add(tSD.type, tSD);
+
+            //switch (tSD.type)
+            //{
+            //    //pull additional attributes based on the type of this <slot>
+            //    case "slot":
+            //        tSD.faceUp = (slotsX[i].att("faceup") == "1");
+            //        tSD.id = int.Parse(slotsX[i].att("id"));
+            //        if (slotsX[i].HasAtt("hiddenby"))
+            //        {
+            //            string[] hiding = slotsX[i].att("hiddenby").Split(',');
+            //            foreach (string s in hiding)
+            //            {
+            //                tSD.hiddenBy.Add(int.Parse(s));
+            //            }
+            //        }
+            //        slotDefs.Add(tSD);
+            //        break;
+
+            //    case "drawpile":
+            //        tSD.stagger.x = float.Parse(slotsX[i].att("xstagger"));
+            //        drawPile = tSD;
+            //        break;
+            //    case "discardpile":
+            //        discardPile = tSD;
+            //        break;
+            //}
         }
     }
 }

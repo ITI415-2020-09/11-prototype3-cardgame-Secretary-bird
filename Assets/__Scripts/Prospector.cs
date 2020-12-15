@@ -28,6 +28,19 @@ public class Prospector : MonoBehaviour {
     public List<CardProspector> drawPile;
     public Transform layoutAnchor;
     public CardProspector target;
+    public List<CardProspector> drawpile1;
+    public List<CardProspector> drawpile2;
+    public List<CardProspector> drawpile3;
+    public List<CardProspector> drawpile4;
+    public List<CardProspector> drawpile5;
+    public List<CardProspector> drawpile6;
+    public List<CardProspector> drawpile7;
+    public List<CardProspector> drawpile8;
+    public List<CardProspector> drawpile9;
+    public List<CardProspector> drawpile10;
+    public List<CardProspector> drawpile11;
+    public List<CardProspector> drawpile12;
+    public List<CardProspector> drawpile13;
     public List<CardProspector> tableau;
     public List<CardProspector> discardPile;
     public FloatingScore fsRun;
@@ -120,42 +133,113 @@ public class Prospector : MonoBehaviour {
         }
 
         CardProspector cp;
-        // Follow the layout
-        foreach(SlotDef tSD in layout.slotDefs)
-        {
-            // ^ Iterate through all the SlotDefs in the layout.slotDefs as tSD
-            cp = Draw(); // Pull a card from the top (beginning) of the draw Pile
-            cp.faceUp = tSD.faceUp; // Set its faceUp to the value in SlotDef
-            cp.transform.parent = layoutAnchor; // Make its parent layoutAnchor
-            // This replaces the previous parent: deck.deckAnchor, which
-            // appears as _Deck in the Hierarchy when the scene is playing.
-            cp.transform.localPosition = new Vector3(layout.multiplier.x * tSD.x, layout.multiplier.y * tSD.y, -tSD.layerID);
-            // ^ Set the localPosition of the card based on slotDef
-            cp.layoutID = tSD.id;
-            cp.slotDef = tSD;
-            // CardProspectors in the tableau have the state CardState.tableau
-            cp.state = eCardState.tableau;
-            // CardProspectors in the tableau have the state CardSTate.tableau
-            cp.SetSortingLayerName(tSD.layerName); // Set the sorting layers
 
-            tableau.Add(cp); // Add this CardProspector to the List<> tableau
-        }
-
-        // Set which cards are hiding others
-        foreach (CardProspector tCP in tableau)
+        for (int i = 0; i < 4; i++)
         {
-            foreach(int hid in tCP.slotDef.hiddenBy)
+            for (int j =1; j<=13; j++)
             {
-                cp = FindCardByLayoutID(hid);
-                tCP.hiddenBy.Add(cp);
+                SlotDef tSD;
+                string tKui = "drawpile";
+                tSD = layout.sDict[tKui + j];
+                cp = Draw();
+                if (i == 3)
+                {
+                    cp.faceUp = true;
+                }
+                else
+                {
+                    cp.faceUp = tSD.faceUp;
+                }
+                cp.transform.parent = layoutAnchor; 
+                cp.transform.localPosition = new Vector3(layout.multiplier.x * (tSD.x + i * tSD.stagger.x), layout.multiplier.y * (tSD.y + i * tSD.stagger.y), -i);
+                // ^ Set the localPosition of the card based on slotDef
+                cp.layoutID = tSD.id;
+                cp.slotDef = tSD;
+                // CardProspectors in the tableau have the state CardState.tableau
+                cp.state = (eCardState)j;
+                // CardProspectors in the tableau have the state CardSTate.tableau
+                cp.SetSortingLayerName(layout.sortingLayerNames[i+1]); // Set the sorting layers
+                cp.SetSortOrder(10 * i);
+                switch (j) {
+                    case 1:
+                        drawpile1.Add(cp);
+                        break;
+                    case 2:
+                        drawpile2.Add(cp);
+                        break;
+                    case 3:
+                        drawpile3.Add(cp);
+                        break;
+                    case 4:
+                        drawpile4.Add(cp);
+                        break;
+                    case 5:
+                        drawpile5.Add(cp);
+                        break;
+                    case 6:
+                        drawpile6.Add(cp);
+                        break;
+                    case 7:
+                        drawpile7.Add(cp);
+                        break;
+                    case 8:
+                        drawpile8.Add(cp);
+                        break;
+                    case 9:
+                        drawpile9.Add(cp);
+                        break;
+                    case 10:
+                        drawpile10.Add(cp);
+                        break;
+                    case 11:
+                        drawpile11.Add(cp);
+                        break;
+                    case 12:
+                        drawpile12.Add(cp);
+                        break;
+                    case 13:
+                        drawpile13.Add(cp);
+                        break;
+                }
             }
         }
 
-        // Set up the initial target card
-        MoveToTarget(Draw());
+        // Follow the layout
+        //foreach(SlotDef tSD in layout.slotDefs)
+        //{
+        //    // ^ Iterate through all the SlotDefs in the layout.slotDefs as tSD
+        //    cp = Draw(); // Pull a card from the top (beginning) of the draw Pile
+        //    cp.faceUp = tSD.faceUp; // Set its faceUp to the value in SlotDef
+        //    cp.transform.parent = layoutAnchor; // Make its parent layoutAnchor
+        //    // This replaces the previous parent: deck.deckAnchor, which
+        //    // appears as _Deck in the Hierarchy when the scene is playing.
+        //    cp.transform.localPosition = new Vector3(layout.multiplier.x * tSD.x, layout.multiplier.y * tSD.y, -tSD.layerID);
+        //    // ^ Set the localPosition of the card based on slotDef
+        //    cp.layoutID = tSD.id;
+        //    cp.slotDef = tSD;
+        //    // CardProspectors in the tableau have the state CardState.tableau
+        //    cp.state = eCardState.tableau;
+        //    // CardProspectors in the tableau have the state CardSTate.tableau
+        //    cp.SetSortingLayerName(tSD.layerName); // Set the sorting layers
 
-        // Set up the Draw pile
-        UpdateDrawPile();
+        //    tableau.Add(cp); // Add this CardProspector to the List<> tableau
+        //}
+
+        //// Set which cards are hiding others
+        //foreach (CardProspector tCP in tableau)
+        //{
+        //    foreach(int hid in tCP.slotDef.hiddenBy)
+        //    {
+        //        cp = FindCardByLayoutID(hid);
+        //        tCP.hiddenBy.Add(cp);
+        //    }
+        //}
+
+        //// Set up the initial target card
+        //MoveToTarget(Draw());
+
+        //// Set up the Draw pile
+        //UpdateDrawPile();
     }
 
     // Convert from the layoutID int to the CardProspector with that ID
@@ -249,48 +333,119 @@ public class Prospector : MonoBehaviour {
     public void CardClicked(CardProspector cd)
     {
         // The reaction is determined by the state of the clicked card
+
         switch (cd.state)
         {
-            case eCardState.target:
-                // Clicking the target card does nothing
+            case eCardState.discard:
+                return;
                 break;
 
-            case eCardState.drawpile:
-                // Clicking any card in the drawPile will draw the next card
-                MoveToDiscard(target); // Moves the target to the discardPile
-                MoveToTarget(Draw()); // Moves the next drawn card to the target
-                UpdateDrawPile(); // Restacks the drawPile
-                ScoreManager.EVENT(eScoreEvent.draw);
-                FloatingScoreHandler(eScoreEvent.draw);
+            case eCardState.drawpile1:
+                drawpile1.RemoveAt(drawpile1.Count - 1);
+                UpdateClockFace(drawpile1);
                 break;
-
-            case eCardState.tableau:
-                // Clicking a card in the tableau will check if it's a valid play
-                bool validMatch = true;
-                if (!cd.faceUp)
-                {
-                    // If the card is face-down, it's not valid
-                    validMatch = false;
-                }
-                if(!AdjacentRank(cd, target))
-                {
-                    // If it's not an adjacent rank, it's not valid
-                    validMatch = false;
-                }
-                if (!validMatch) return; // return if not valid
-
-                // If we got here then it's a valid card
-                tableau.Remove(cd); // Remove it from the tableau List
-                MoveToTarget(cd); // Make it the target card
-                SetTableauFaces(); // Update tableau card face-ups
-                ScoreManager.EVENT(eScoreEvent.mine);
-                FloatingScoreHandler(eScoreEvent.mine);
+            case eCardState.drawpile2:
+                drawpile2.RemoveAt(drawpile2.Count - 1);
+                UpdateClockFace(drawpile2);
+                break;
+            case eCardState.drawpile3:
+                drawpile3.RemoveAt(drawpile3.Count - 1);
+                UpdateClockFace(drawpile3);
+                break;
+            case eCardState.drawpile4:
+                drawpile4.RemoveAt(drawpile4.Count - 1);
+                UpdateClockFace(drawpile4);
+                break;
+            case eCardState.drawpile5:
+                drawpile5.RemoveAt(drawpile5.Count - 1);
+                UpdateClockFace(drawpile5);
+                break;
+            case eCardState.drawpile6:
+                drawpile6.RemoveAt(drawpile6.Count - 1);
+                UpdateClockFace(drawpile6);
+                break;
+            case eCardState.drawpile7:
+                drawpile7.RemoveAt(drawpile7.Count - 1);
+                UpdateClockFace(drawpile7);
+                break;
+            case eCardState.drawpile8:
+                drawpile8.RemoveAt(drawpile8.Count - 1);
+                UpdateClockFace(drawpile8);
+                break;
+            case eCardState.drawpile9:
+                drawpile9.RemoveAt(drawpile9.Count - 1);
+                UpdateClockFace(drawpile9);
+                break;
+            case eCardState.drawpile10:
+                drawpile10.RemoveAt(drawpile10.Count - 1);
+                UpdateClockFace(drawpile10);
+                break;
+            case eCardState.drawpile11:
+                drawpile11.RemoveAt(drawpile11.Count - 1);
+                UpdateClockFace(drawpile11);
+                break;
+            case eCardState.drawpile12:
+                drawpile12.RemoveAt(drawpile12.Count - 1);
+                UpdateClockFace(drawpile12);
+                break;
+            case eCardState.drawpile13:
+                drawpile13.RemoveAt(drawpile13.Count - 1);
+                UpdateClockFace(drawpile13);
                 break;
         }
+
+        cd.state = eCardState.discard;
+        SlotDef tSD = layout.sDict["drawpile" + cd.rank];
+        cd.slotDef.x = tSD.x;
+        cd.slotDef.y = tSD.y;
+        cd.slotDef.faceUp = true;
+        cd.transform.localPosition = new Vector3(layout.multiplier.x * tSD.x, layout.multiplier.y * tSD.y, 0);
+        cd.SetSortingLayerName(layout.sortingLayerNames[0]);
+        discardPile.Add(cd);
+
+            //case eCardState.drawpile:
+            //    // Clicking any card in the drawPile will draw the next card
+            //    MoveToDiscard(target); // Moves the target to the discardPile
+            //    MoveToTarget(Draw()); // Moves the next drawn card to the target
+            //    UpdateDrawPile(); // Restacks the drawPile
+            //    ScoreManager.EVENT(eScoreEvent.draw);
+            //    FloatingScoreHandler(eScoreEvent.draw);
+            //    break;
+
+            //case eCardState.tableau:
+            //    // Clicking a card in the tableau will check if it's a valid play
+            //    bool validMatch = true;
+            //    if (!cd.faceUp)
+            //    {
+            //        // If the card is face-down, it's not valid
+            //        validMatch = false;
+            //    }
+            //    if(!AdjacentRank(cd, target))
+            //    {
+            //        // If it's not an adjacent rank, it's not valid
+            //        validMatch = false;
+            //    }
+            //    if (!validMatch) return; // return if not valid
+
+            //    // If we got here then it's a valid card
+            //    tableau.Remove(cd); // Remove it from the tableau List
+            //    MoveToTarget(cd); // Make it the target card
+            //    SetTableauFaces(); // Update tableau card face-ups
+            //    ScoreManager.EVENT(eScoreEvent.mine);
+            //    FloatingScoreHandler(eScoreEvent.mine);
+            //    break;
+        
         // Check to see whether the game is over or not
-        CheckForGameOver();
+        //CheckForGameOver();
     }
 
+    private void UpdateClockFace(List<CardProspector>dp)
+    {
+        if (dp.Count > 0)
+        {
+            dp[dp.Count - 1].faceUp = true;
+        }
+    }
     // Test whether the game is over
     void CheckForGameOver()
     {
